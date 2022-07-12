@@ -1,0 +1,15 @@
+{
+  "name": "flow-livestream-sdk",
+  "version": "0.0.1",
+  "description": "Graffle.io javascript SDK for our livestreaming service.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Graffle.io",
+  "license": "MIT",
+  "dependencies": {
+    "@microsoft/signalr": "^5.0.5",
+    "axios": "^0.21.1"
+  }
+}
