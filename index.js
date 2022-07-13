@@ -3,24 +3,25 @@ const axios = require('axios');
 
 export default function GraffleSDK(clientConfig, isTestNet = false) {
   let negotiateResult;
+  let connection = null;
 
   const negotiate = async () => {
     const authHeader = {
-      'graffle-api-key': isTestNet ? clientConfig.testNetApiKey : clientConfig.mainNetApiKey
+      'graffle-api-key': clientConfig.apiKey
     }
 
     const url = isTestNet ?
-    'https://prod-test-net-api-manager.azure-api.net/test-net-livestream/api/negotiateLiveStream' :
-    'https://prod-main-net-api-manager.azure-api.net/main-net-livestream/api/negotiateLiveStream';
-    
+      'https://prod-test-net-api-manager.azure-api.net/test-net-livestream/api/negotiateLiveStream' :
+      'https://prod-main-net-api-manager.azure-api.net/main-net-livestream/api/negotiateLiveStream';
+
     negotiateResult = await axios.post(
-      url, {}, {headers: authHeader}
-    );    
+      url, {}, { headers: authHeader }
+    );
   };
 
   this.stream = async (streamCallback) => {
     await negotiate();
-    const connection = new signalR.HubConnectionBuilder()
+    connection = new signalR.HubConnectionBuilder()
       .withUrl(negotiateResult.data.url, {
         accessTokenFactory: () => negotiateResult.data.accessToken,
       })
@@ -36,4 +37,12 @@ export default function GraffleSDK(clientConfig, isTestNet = false) {
       });
     }
   };
+
+  this.disconnect = () => {
+    if (connection) {
+      console.log("Disconnecting from SignalR hub...")
+      connection.stop();
+      connection = null;
+    }
+  }
 }
