@@ -1,5 +1,5 @@
 {
-  "name": "flow-livestream-sdk",
+  "name": "@graffle/flow-livestream-sdk",
   "version": "0.0.1",
   "description": "Graffle.io javascript SDK for our livestreaming service.",
   "main": "index.js",
@@ -11,5 +11,12 @@
   "dependencies": {
     "@microsoft/signalr": "^5.0.5",
     "axios": "^0.21.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Graffle/flow-livestream-sdk"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/Graffle"
   }
 }
