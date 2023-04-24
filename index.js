@@ -12,7 +12,7 @@ export default function GraffleSDK(clientConfig, isTestNet = false) {
 
     const url = isTestNet ?
       'https://prod-test-net-api-manager.azure-api.net/test-net-livestream/api/negotiateLiveStream' :
-      'https://prod-main-net-api-manager.azure-api.net/main-net-livestream/api/negotiateLiveStream';
+      'https://api.graffle.io/main-net-livestream/api/negotiateLiveStream';
 
     negotiateResult = await axios.post(
       url, {}, { headers: authHeader }
